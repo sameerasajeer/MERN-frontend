@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 
-const API_BASE = 'https://mern-backend-vbv7.onrender.com';
+const API_BASE = 'https://mern-backend-vbv7.onrender.com/api/notes';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -140,11 +140,11 @@ function App() {
   };
 
   // Filter notes based on view
-  const filteredNotes = notes.filter(note => {
+  const filteredNotes = Array.isArray(notes) ? notes.filter(note => {
     if (view === 'favorites') return note.isFavorite && !note.isTrashed;
     if (view === 'trash') return note.isTrashed;
     return !note.isTrashed;
-  });
+  }) : [];
 
   return (
     <div className="flex h-screen w-screen bg-gray-100 overflow-hidden font-sans relative">
