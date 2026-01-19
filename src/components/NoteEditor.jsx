@@ -168,7 +168,8 @@ const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobile
                         <Edit3 size={32} className="text-gray-300" />
                     </div>
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">Select a note to view</h2>
-                    <p className="max-w-xs">Choose a note from the library or start a fresh one to begin writing.</p>
+                    <p className="max-w-xs mb-6">Choose a note from the library or start a fresh one to begin writing.</p>
+                    <button onClick={onBack} className="md:hidden px-6 py-2 bg-gray-200 text-gray-600 rounded-full text-sm font-medium">Back to List</button>
                 </div>
             </div>
         );

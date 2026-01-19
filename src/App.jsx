@@ -158,8 +158,8 @@ function App() {
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      <div className={`flex flex-1 h-full overflow-hidden transition-all duration-300 ${mobileView === 'editor' ? 'translate-x-[-100%] md:translate-x-0' : 'translate-x-0'}`}>
-        <div className="w-full md:w-80 flex-shrink-0 border-r border-gray-200 min-w-full md:min-w-0">
+      <div className={`flex flex-1 w-full h-full overflow-hidden transition-transform duration-300 ease-in-out ${mobileView === 'editor' ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}`} style={{ transform: mobileView === 'editor' && window.innerWidth < 768 ? 'translateX(-100%)' : undefined }}>
+        <div className="flex-shrink-0 w-full md:w-80 md:flex-shrink-0 border-r border-gray-200">
           <NoteList
             notes={filteredNotes}
             selectedNoteId={selectedNote?._id}
@@ -169,7 +169,7 @@ function App() {
             onMenuClick={() => setIsSidebarOpen(true)}
           />
         </div>
-        <div className="w-full md:flex-1 min-w-full md:min-w-0 bg-white">
+        <div className="flex-shrink-0 w-full md:flex-1 bg-white">
           <NoteEditor
             note={selectedNote}
             onSave={handleSaveNote}
