@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import VideoRecorder from './VideoRecorder';
 import { useEffect, useRef, useState } from 'react';
 
-const API_BASE = 'http://localhost:5000/api/notes';
+const API_BASE = 'https://mern-backend-vbv7.onrender.com';
 
 const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobileView }) => {
     const [title, setTitle] = useState('');
