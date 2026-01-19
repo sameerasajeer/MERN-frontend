@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 
-const API_BASE = 'http://localhost:5000/api/notes';
+const API_BASE = 'https://mern-backend-vbv7.onrender.com';
 
 function App() {
   const [notes, setNotes] = useState([]);
