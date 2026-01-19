@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import VideoRecorder from './VideoRecorder';
 import { useEffect, useRef, useState } from 'react';
 
-const API_BASE = 'https://mern-backend-vbv7.onrender.com';
+import { API_BASE } from '../config';
 
 const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobileView }) => {
     const [title, setTitle] = useState('');
@@ -264,19 +264,18 @@ const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobile
                         <Trash2 size={18} />
                     </button>
 
-                    {!isMobileView && (
-                        <button
-                            onClick={handleSave}
-                            disabled={!isDirty || isSaving}
-                            className={`ml-2 px-4 py-2 rounded-lg flex items-center space-x-2 font-medium transition-all ${isDirty && !isSaving
-                                ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/20'
-                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                }`}
-                        >
-                            {isSaving ? <Loader size={16} className="animate-spin" /> : <Save size={16} />}
-                            <span className="hidden lg:inline">Save</span>
-                        </button>
-                    )}
+                    {/* Show save button always or keep it hidden if auto-save is enough - but let's make it visible on mobile to be sure */}
+                    <button
+                        onClick={handleSave}
+                        disabled={!isDirty || isSaving}
+                        className={`ml-2 px-3 md:px-4 py-2 rounded-lg flex items-center space-x-2 font-medium transition-all ${isDirty && !isSaving
+                            ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/20'
+                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            }`}
+                    >
+                        {isSaving ? <Loader size={16} className="animate-spin" /> : <Save size={16} />}
+                        <span className="hidden sm:inline">Save</span>
+                    </button>
                 </div>
             </div>
 
