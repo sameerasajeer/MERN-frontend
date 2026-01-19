@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 
-const API_BASE = 'https://mern-backend-vbv7.onrender.com/api/notes';
+import { API_BASE } from './config';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -159,7 +159,7 @@ function App() {
       />
 
       <div className={`flex flex-1 h-full overflow-hidden transition-all duration-300 ${mobileView === 'editor' ? 'translate-x-[-100%] md:translate-x-0' : 'translate-x-0'}`}>
-        <div className="w-full md:w-80 flex-shrink-0 border-r border-gray-200">
+        <div className="w-full md:w-80 flex-shrink-0 border-r border-gray-200 min-w-full md:min-w-0">
           <NoteList
             notes={filteredNotes}
             selectedNoteId={selectedNote?._id}
@@ -169,7 +169,7 @@ function App() {
             onMenuClick={() => setIsSidebarOpen(true)}
           />
         </div>
-        <div className="w-full flex-1 bg-white">
+        <div className="w-full md:flex-1 min-w-full md:min-w-0 bg-white">
           <NoteEditor
             note={selectedNote}
             onSave={handleSaveNote}
