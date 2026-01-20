@@ -7,6 +7,6 @@
 }
 
 body {
-    background-color: var(--color-gray-100);
+    background-color: red !important;
     color: var(--color-gray-800);
 }
