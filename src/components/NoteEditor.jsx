@@ -258,7 +258,10 @@ const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobile
                     )}
 
                     <button
-                        onClick={() => onDelete(note._id)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(note._id);
+                        }}
                         className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                         title={note.isTrashed ? "Delete Permanently" : "Move to Trash"}
                     >

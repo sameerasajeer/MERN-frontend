@@ -64,6 +64,7 @@ function App() {
   };
 
   const handleDeleteNote = async (id) => {
+    console.log('DEBUG: handleDeleteNote called with ID:', id);
     if (!id) {
       setSelectedNote(null);
       setMobileView('list');
