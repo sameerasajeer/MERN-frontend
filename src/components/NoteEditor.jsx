@@ -16,6 +16,7 @@ const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobile
     const [isRecording, setIsRecording] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [showVideoRecorder, setShowVideoRecorder] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
     const recognitionRef = useRef(null);
     const fileInputRef = useRef(null);
     const saveTimeoutRef = useRef(null);
@@ -257,16 +258,40 @@ const NoteEditor = ({ note, onSave, onDelete, onToggleFavorite, onBack, isMobile
                         </button>
                     )}
 
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onDelete(note._id);
-                        }}
-                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                        title={note.isTrashed ? "Delete Permanently" : "Move to Trash"}
-                    >
-                        <Trash2 size={18} />
-                    </button>
+                    {confirmDelete ? (
+                        <div className="flex items-center space-x-1 animate-in fade-in slide-in-from-right-2 duration-200">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onDelete(note._id);
+                                    setConfirmDelete(false);
+                                }}
+                                className="px-3 py-1.5 bg-red-500 text-white text-xs font-bold rounded-lg hover:bg-red-600 transition-colors shadow-sm"
+                            >
+                                Confirm
+                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setConfirmDelete(false);
+                                }}
+                                className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                            >
+                                <RotateCcw size={16} />
+                            </button>
+                        </div>
+                    ) : (
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setConfirmDelete(true);
+                            }}
+                            className={`p-2 rounded-lg transition-all ${note.isTrashed ? 'text-red-500 bg-red-50' : 'text-gray-400 hover:bg-red-500 hover:text-white'}`}
+                            title={note.isTrashed ? "Delete Permanently" : "Move to Trash"}
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    )}
 
                     {/* Show save button always or keep it hidden if auto-save is enough - but let's make it visible on mobile to be sure */}
                     <button

@@ -64,27 +64,23 @@ function App() {
   };
 
   const handleDeleteNote = async (id) => {
-    console.log('DEBUG: handleDeleteNote called with ID:', id);
     if (!id) {
-      setSelectedNote(null);
-      setMobileView('list');
+      console.error('Delete failed: No ID provided');
       return;
     }
 
-    const isTrashed = selectedNote?.isTrashed;
-    const confirmMsg = isTrashed
-      ? 'Are you sure you want to delete this note permanently?'
-      : 'Are you sure you want to move this note to trash?';
-
-    if (!window.confirm(confirmMsg)) return;
-
     try {
-      await axios.delete(`${API_BASE}/${id}`);
+      console.log('Sending DELETE request for ID:', id);
+      const res = await axios.delete(`${API_BASE}/${id}`);
+      console.log('Delete successful:', res.data);
+
       setNotes(prev => prev.filter(n => n._id !== id));
       setSelectedNote(null);
       setMobileView('list');
     } catch (err) {
       console.error('Error deleting note:', err);
+      const errorMsg = err.response?.data || err.message;
+      alert(`Failed to delete note: ${errorMsg}`);
       fetchNotes();
     }
   };
